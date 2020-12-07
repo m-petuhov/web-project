@@ -1,0 +1,21 @@
+name: CD
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged
+    steps:
+      - uses: actions/checkout@v2
+      - name: checkout
+        if: github.event.pull_request.merged
+        run: |
+          echo Building project...
+          echo Connecting to server...
+          echo Deploying...
+          echo Done!

@@ -1,0 +1,52 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  liquibase_tests:
+    runs-on: ubuntu-latest
+      
+    services:
+      db:
+        image: postgres:11
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 10
+        ports:
+        - 5432/tcp
+        env:
+          POSTGRES_DB: mydb
+          POSTGRES_USER: mydb
+          POSTGRES_PASSWORD: mydb
+          
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.104
+    
+    - name: Setup liqubase
+      env:
+        loglevel: debug
+        username: mydb
+        password: mydb
+        dbname: mydb
+        host: 127.0.0.1
+        port: ${{ job.services.db.ports[5432] }}
+        changeLogFile: ./Homework1/src/Database/Migrations/index.xml
+      run: |
+        docker-compose up -d api
+        wget https://github.com/liquibase/liquibase/releases/download/liquibase-parent-3.6.3/liquibase-3.6.3-bin.tar.gz
+        wget https://jdbc.postgresql.org/download/postgresql-42.2.5.jar
+        tar xzvf liquibase-3.6.3-bin.tar.gz
+        chmod 777 ./run-migrations.sh
+        ./run-migrations.sh
+        
+    - name: Run tests
+      env:
+        ConnectionString: Host=127.0.0.1;Port=${{ job.services.db.ports[5432] }};Database=mydb;Username=mydb;Password=mydb
+      run: |
+        cd ./Homework1.Test
+        dotnet test
