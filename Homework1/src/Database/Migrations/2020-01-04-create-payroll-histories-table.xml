@@ -6,35 +6,32 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2019-03-07-06-create-user-roles-table" author="developerRus">
+    <changeSet id="2020-01-04-create-payroll-histories-table" author="shah">
 
-        <createTable tableName="user_roles">
+        <createTable tableName="payroll_histories">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="user_id" type="int">
+            <column name="user_id" type="int" autoIncrement="false">
                 <constraints nullable="false"/>
             </column>
 
-            <column name="role_id" type="int">
+            <column name="value_rate" type="money">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="update_at" type="date">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
         <addForeignKeyConstraint
-            baseTableName="user_roles"
-            baseColumnNames="user_id"
-            constraintName="fk_user_roles_user__users"
-            referencedColumnNames="id"
-            referencedTableName="users"/>
-
-        <addForeignKeyConstraint
-            baseTableName="user_roles"
-            baseColumnNames="role_id"
-            constraintName="fk_user_roles_role__roles"
-            referencedColumnNames="id"
-            referencedTableName="roles"/>
+                baseTableName="payroll_histories"
+                baseColumnNames="user_id"
+                constraintName="fk_payroll_histories_user__users"
+                referencedColumnNames="id"
+                referencedTableName="users"/>
 
     </changeSet>
 

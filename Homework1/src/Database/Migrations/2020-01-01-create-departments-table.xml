@@ -6,15 +6,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2019-03-08-01-departments-seed" author="developerRus" context="dev, test">
+    <changeSet id="2020-01-01-create-departments-table" author="shah">
 
-        <insert tableName="departments">
-            <column name="name" value="managers"/>
-        </insert>
+        <createTable tableName="departments">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
 
-        <insert tableName="departments">
-            <column name="name" value="developers"/>
-        </insert>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
     </changeSet>
 </databaseChangeLog>

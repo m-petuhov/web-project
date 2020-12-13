@@ -34,3 +34,5 @@ services:
       - host=db
       - port=5432
       - changeLogFile=./Migrations/index.xml
+
+# docker image build -f Liquibase.Dockerfile -t liquibase .

@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2019-03-08-03-users-seed" author="developerRus" context="dev">
+    <changeSet id="2020-01-03-users-seed" author="shah" context="dev">
 
         <insert tableName="users">
             <column name="first_name" value="user"/>

@@ -13,7 +13,7 @@ using Qoden.Validation;
 
 namespace Homework1.Hubs
 {
-    //[Authorize]
+    [Authorize]
     public class ChatHub : BaseHub
     {
         private readonly IChatService _chatService;

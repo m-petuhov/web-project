@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="2019-03-07-05-add-column-current-salary-rate-to-users-table.xml" author="developerRus">
+    <changeSet id="2020-01-05-add-column-current-salary-rate-to-users-table" author="shah">
 
         <addColumn tableName="users">
             <column name="current_salary_rate_id" type="int">
